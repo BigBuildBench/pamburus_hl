@@ -1,0 +1,92 @@
+[workspace]
+members = [".", "crate/encstr"]
+
+[workspace.package]
+repository = "https://github.com/pamburus/hl"
+authors = ["Pavel Ivanov <mr.pavel.ivanov@gmail.com>"]
+version = "0.29.9-alpha.4"
+edition = "2021"
+license = "MIT"
+
+[package]
+name = "hl"
+description = "JSON and logfmt log converter to human readable representation"
+categories = ["command-line-utilities"]
+keywords = ["cli", "human", "log"]
+build = "build.rs"
+repository.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+version.workspace = true
+
+[build-dependencies]
+capnpc = "0"
+hex = "0"
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", features = ["raw_value"] }
+sha2 = "0"
+
+[dependencies]
+
+[target.'cfg(target_os = "macos")'.dependencies]
+kqueue = "1"
+
+[dev-dependencies]
+byte-strings = "0"
+criterion = "0"
+maplit = "1"
+stats_alloc = "0"
+regex = "1"
+wildmatch = "2"
+
+[profile.release]
+debug = false
+opt-level = 3
+codegen-units = 1
+lto = true
+
+[[bench]]
+name = "regex"
+harness = false
+
+[[bench]]
+name = "ts-parse"
+harness = false
+
+[[bench]]
+name = "ts-format"
+harness = false
+
+[[bench]]
+name = "wildmatch"
+harness = false
+
+[[bench]]
+name = "wildflower"
+harness = false
+
+[[bench]]
+name = "theme"
+harness = false
+
+[[bench]]
+name = "parse-and-format"
+harness = false
+
+[[bench]]
+name = "string"
+harness = false
+
+[[bench]]
+name = "json"
+harness = false
+
+[[bench]]
+name = "mem"
+harness = false
+
+[[bench]]
+name = "encstr"
+path = "benches/encstr/benches.rs"
+harness = false
